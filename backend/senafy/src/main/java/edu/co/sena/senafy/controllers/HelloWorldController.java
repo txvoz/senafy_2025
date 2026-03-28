@@ -15,13 +15,14 @@ public class HelloWorldController {
     @GetMapping("/saludar")
     public String saludar(){
         System.out.println("Paso por el metodo saludar");
-        return "Hola Adso 2026";
+        return "Hola Adso 2026   ";
     }
 
     @GetMapping("/despedir")
     public String despedir(){
-        System.out.println("Paso por el metodo despedir");
-        return "Chao Adso 2026";
+        System.out.println("asdasd asdasd  asd");
+        System.out.println("Paso por el metodo despedir ");
+        return "Chao Adso 2026 ";
     }
 
 

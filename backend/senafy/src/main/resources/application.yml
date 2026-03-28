@@ -1,0 +1,10 @@
+spring:
+  devtools:
+    add-properties: true
+  application:
+    name: senafy
+    admin:
+      enabled: false
+
+server:
+  port: 8181
