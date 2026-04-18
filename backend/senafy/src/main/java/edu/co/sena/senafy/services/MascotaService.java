@@ -53,6 +53,8 @@ public class MascotaService {
         entity.setRaza(newEntity.getRaza());
         entity.setColor(newEntity.getColor());
 
+        this.repository.save(entity);
+
         return true;
     }
 
