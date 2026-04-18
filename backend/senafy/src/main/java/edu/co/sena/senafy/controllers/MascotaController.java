@@ -49,7 +49,7 @@ public class MascotaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseDto<MascotaResponseDto> getDetail(@PathVariable("id") String id){
+    public ResponseDto<MascotaResponseDto> getDetail(@PathVariable("id") Long id){
         MascotaResponseDto response = this.service.getDetail(id);
         return ResponseDto.<MascotaResponseDto>builder()
                 .data(response)
@@ -58,7 +58,7 @@ public class MascotaController {
 
     @PutMapping("/{id}")
     public ResponseDto<MascotaCreateResponseDto> update(
-            @PathVariable("id") String id,
+            @PathVariable("id") Long id,
             @RequestBody @Validated MascotaCreateRequestDto dto) {
 
         boolean response = this.service.update(id, dto);
@@ -71,7 +71,7 @@ public class MascotaController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseDto<GeneralResponseDto> delete(@PathVariable("id") String id){
+    public ResponseDto<GeneralResponseDto> delete(@PathVariable("id") Long id){
         this.service.delete(id);
         return ResponseDto.<GeneralResponseDto>builder()
                 .data(GeneralResponseDto.builder()
