@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MascotaResponseDto {
 
+    private Long id;
+
     private String identificacion;
 
     private String nombre;
