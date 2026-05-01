@@ -38,3 +38,7 @@ output#salida.show {
     background-color: rgb(255, 214, 206);
     color: rgb(164, 44, 22);
 }
+
+table tbody button {
+    margin-left: 10px;
+}
