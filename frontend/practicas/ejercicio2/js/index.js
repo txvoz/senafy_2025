@@ -1,7 +1,8 @@
+const KEY_DATABASE = "REGISTRO_USUARIOS";
 var registros = [];
 
 $(function () {
-
+    loadData();
     $("#txtNombre, #slcGnero, #txtEdad").on("change", onChangeInputWithErrorClass);
     $("#btnValidar").click(onClickButton);
 
@@ -108,4 +109,14 @@ function eliminarRegistro(id) {
 
 function removeClassError(target) {
     $(target).removeClass("error");
+}
+
+function loadData() {
+    var plainData = localStorage.getItem(KEY_DATABASE);
+    if(plainData !== null) {
+
+    } else {
+        var stringData = JSON.stringify(data);
+        localStorage.setItem(KEY_DATABASE);
+    }
 }
