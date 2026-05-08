@@ -1,0 +1,44 @@
+input.error, select.error {
+    border: 1px solid red;
+    background-color: #ffefef;
+}
+
+output#salida {
+    position: relative;
+    padding: 50px;
+    font-size: 30px;
+    border: 3px solid #777;
+    width: 100%;
+    z-index: -1000;
+    top: -1000px;
+
+    transition: top 2s ease, opacity 2.5s linear;;
+
+    border-radius: 20px;
+    opacity: 0;
+}
+
+output#salida.show {
+    opacity: 1;
+    top: 0px;
+    z-index: 1000;
+}
+
+.cero {
+    background-color: rgb(206, 206, 255);
+    color: rgb(25, 25, 86);
+}
+
+.par {
+    background-color: rgb(206, 255, 222);
+    color: rgb(25, 86, 42);
+}
+
+.impar {
+    background-color: rgb(255, 214, 206);
+    color: rgb(164, 44, 22);
+}
+
+table tbody button {
+    margin-left: 10px;
+}
