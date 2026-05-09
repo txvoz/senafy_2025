@@ -1,7 +1,9 @@
+const KEY_DATABASE = "REGISTRO_USUARIOS";
 var registros = [];
 
 $(function () {
-
+    loadData();
+    printData();
     $("#txtNombre, #slcGnero, #txtEdad").on("change", onChangeInputWithErrorClass);
     $("#btnValidar").click(onClickButton);
 
@@ -47,7 +49,7 @@ var onClickButton = function (e) {
         var idUpdate = parseInt($("#idUpdate").val());
         registros[idUpdate] = newRegistro;
     }
-
+    saveData();
     printData();
 
     $("#btnLimpiar").click();
@@ -101,6 +103,7 @@ function detalleRegistro(id){
 function eliminarRegistro(id) {
     if(confirm("Esta seguro de eliminar el registro?")) {
         registros.splice(id, 1);
+        saveData();
         printData();
     }
 }
@@ -108,4 +111,28 @@ function eliminarRegistro(id) {
 
 function removeClassError(target) {
     $(target).removeClass("error");
+}
+
+function loadData() {
+    var plainData = localStorage.getItem(KEY_DATABASE);
+    if(plainData !== null) {
+        try {
+            console.log("Try load localStorage data");
+            registros = JSON.parse(plainData);
+        } catch (e) {
+            console.log("Error load localStorage data");
+            registros = [];
+            saveData();
+        }
+        console.log("Cargo data localstorage");
+    } else {
+        console.log("Sync first time");
+        saveData();
+    }
+}
+
+function saveData() {
+    var stringData = JSON.stringify(registros);
+    localStorage.setItem(KEY_DATABASE, stringData);
+    console.log("Sync data");
 }
