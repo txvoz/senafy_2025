@@ -9,9 +9,7 @@ $(function () {
 
 });
 
-var onChangeInputWithErrorClass = function (e) {
-    removeClassError(e.target);
-}
+
 
 var onClickButton = function (e) {
     e.preventDefault();
@@ -108,10 +106,6 @@ function eliminarRegistro(id) {
     }
 }
 
-
-function removeClassError(target) {
-    $(target).removeClass("error");
-}
 
 function loadData() {
     var plainData = localStorage.getItem(KEY_DATABASE);
