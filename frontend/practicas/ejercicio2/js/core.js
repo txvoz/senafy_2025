@@ -1,4 +1,5 @@
 var validMethods = ["GET", "POST", "PUT", "DELETE"];
+var ROOT_URL = "http://localhost:8181/";
 
 function callApi(url, method, data, cbSuccess, cbError) {
 

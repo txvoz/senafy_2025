@@ -1,11 +1,13 @@
 package edu.co.sena.senafy.services;
 
 import edu.co.sena.senafy.dtos.*;
+import edu.co.sena.senafy.entities.AdRateEntity;
 import edu.co.sena.senafy.entities.ProviderEntity;
 import edu.co.sena.senafy.repositories.ProviderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.*;
 
 @Service
@@ -67,11 +69,24 @@ public class ProviderService {
     }
 
     public ProviderResponseDto entityToDto(ProviderEntity entity){
+
+        Date now = new Date();
+
+        List<AdRateEntity> adRates = entity.getAdRates();
+        AdRateEntity currentAdRate = adRates
+                .stream()
+                .filter(r -> r.getEffectiveDate().getTime() >= now.getTime())
+                .findFirst()
+                .orElse(null);
+
         return ProviderResponseDto.builder()
                 .id(entity.getId())
                 .name(entity.getName())
                 .email(entity.getEmail())
                 .phone(entity.getPhone())
+                .countAdRates(adRates.size())
+                .currentAdRateAmount(Objects.isNull(currentAdRate) ? 0 : currentAdRate.getCostPerView())
+                .isAdRateActive(!Objects.isNull(currentAdRate))
                 .build();
     }
 

@@ -2,14 +2,15 @@ package edu.co.sena.senafy.dtos;
 
 import lombok.*;
 
+import java.util.Date;
+
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class AdRateCreateRequestDto {
 
-    private Integer providerId;
+    private Long providerId;
     private Double costPerView;
-    private java.time.LocalDate effectiveDate;
-
+    private Date effectiveDate;
 }

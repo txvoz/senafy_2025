@@ -3,6 +3,8 @@ package edu.co.sena.senafy.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Date;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -17,13 +19,18 @@ public class AdRateEntity {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "provider_id")
-    private Integer providerId;
+    //@Column(name = "provider_id")
+    //private Integer providerId;
+
+    @ManyToOne
+    @JoinColumn(name = "provider_id", nullable = false, updatable = true)
+    private ProviderEntity provider;
+
 
     @Column(name = "cost_per_view")
     private Double costPerView;
 
     @Column(name = "effective_date")
-    private java.time.LocalDate effectiveDate;
+    private Date effectiveDate;
 
 }

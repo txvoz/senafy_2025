@@ -50,3 +50,8 @@ table tbody button {
     border: 1px dotted grey;
     border-radius: 50%;
 }
+
+.alert-row {
+    background-color: #ffe8e8;
+    color: #740202;
+}

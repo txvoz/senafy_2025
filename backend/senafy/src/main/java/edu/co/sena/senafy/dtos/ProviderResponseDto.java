@@ -12,5 +12,8 @@ public class ProviderResponseDto {
     private String name;
     private String email;
     private String phone;
+    private int countAdRates;
+    private double currentAdRateAmount;
+    private boolean isAdRateActive = false;
 
 }

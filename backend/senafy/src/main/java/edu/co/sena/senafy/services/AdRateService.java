@@ -2,6 +2,7 @@ package edu.co.sena.senafy.services;
 
 import edu.co.sena.senafy.dtos.*;
 import edu.co.sena.senafy.entities.AdRateEntity;
+import edu.co.sena.senafy.entities.ProviderEntity;
 import edu.co.sena.senafy.repositories.AdRateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,9 @@ public class AdRateService {
 
     @Autowired
     private AdRateRepository repository;
+
+    @Autowired
+    private ProviderService providerService;
 
     public boolean create(AdRateCreateRequestDto dto){
         AdRateEntity entity = this.dtoToEntity(dto);
@@ -37,7 +41,7 @@ public class AdRateService {
     public boolean update(Long id, AdRateCreateRequestDto dto) {
         AdRateEntity entity = validateIfExist(id);
         AdRateEntity newEntity = dtoToEntity(dto);
-        entity.setProviderId(newEntity.getProviderId());
+        //entity.setProviderId(newEntity.getProviderId());
         entity.setCostPerView(newEntity.getCostPerView());
         entity.setEffectiveDate(newEntity.getEffectiveDate());
 
@@ -59,19 +63,26 @@ public class AdRateService {
     }
 
     public AdRateEntity dtoToEntity(AdRateCreateRequestDto dto){
+
+        ProviderEntity providerEntity = this.providerService.validateIfExist(dto.getProviderId());
+
         return AdRateEntity.builder()
-                .providerId(dto.getProviderId())
+                .provider(providerEntity)
                 .costPerView(dto.getCostPerView())
                 .effectiveDate(dto.getEffectiveDate())
                 .build();
     }
 
     public AdRateResponseDto entityToDto(AdRateEntity entity){
+        Date now = new Date();
+
         return AdRateResponseDto.builder()
                 .id(entity.getId())
-                .providerId(entity.getProviderId())
+                .providerId(entity.getProvider().getId())
+                .providerName(entity.getProvider().getName())
                 .costPerView(entity.getCostPerView())
                 .effectiveDate(entity.getEffectiveDate())
+                .isAdRateActive(entity.getEffectiveDate().getTime() >= now.getTime())
                 .build();
     }
 
