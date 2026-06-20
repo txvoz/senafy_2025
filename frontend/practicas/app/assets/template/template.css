@@ -1,0 +1,114 @@
+ body {
+     background: linear-gradient(to bottom, #0b1020, #000);
+     color: white;
+     font-family: 'Segoe UI', sans-serif;
+     min-height: 100vh;
+ }
+
+ .sidebar {
+     width: 260px;
+     min-height: 100vh;
+     background: rgba(0, 0, 0, 0.3);
+     padding: 30px 20px;
+ }
+
+ .logo {
+     font-size: 2rem;
+     font-weight: 700;
+     display: flex;
+     align-items: center;
+     gap: 10px;
+ }
+
+ .logo-circle {
+     width: 40px;
+     height: 40px;
+     background: #1DB954;
+     border-radius: 50%;
+ }
+
+ .menu-item {
+     padding: 12px 0;
+     color: #d0d0d0;
+     text-decoration: none;
+     display: flex;
+     align-items: center;
+     gap: 15px;
+     font-size: 1.2rem;
+ }
+
+ .menu-item:hover {
+     color: white;
+ }
+
+ .album-cover {
+     width: 260px;
+     height: 260px;
+     border-radius: 20px;
+     background: linear-gradient(135deg, #1db954, #0d5c34);
+     display: flex;
+     justify-content: center;
+     align-items: center;
+ }
+
+ .album-cover-inner {
+     width: 110px;
+     height: 110px;
+     border-radius: 25px;
+     background: rgba(255, 255, 255, 0.1);
+     position: relative;
+ }
+
+ .album-cover-inner::before {
+     content: "";
+     position: absolute;
+     width: 60px;
+     height: 60px;
+     border: 10px solid rgba(0, 0, 0, 0.2);
+     border-radius: 50%;
+     top: 50%;
+     left: 50%;
+     transform: translate(-50%, -50%);
+ }
+
+ .album-title {
+     font-size: 5rem;
+     font-weight: 700;
+ }
+
+ .artist-name {
+     font-size: 2rem;
+     color: #bdbdbd;
+ }
+
+ .btn-play {
+     background: #1DB954;
+     color: white;
+     border: none;
+     border-radius: 40px;
+     padding: 14px 60px;
+     font-size: 1.8rem;
+     font-weight: 600;
+ }
+
+ .btn-play:hover {
+     background: #18a64a;
+ }
+
+ .track-list {
+     margin-top: 50px;
+ }
+
+ .track-item {
+     padding: 12px 0;
+     font-size: 2rem;
+ }
+
+ .track-number {
+     width: 50px;
+     color: #aaa;
+ }
+
+ .track-duration {
+     color: #aaa;
+ }

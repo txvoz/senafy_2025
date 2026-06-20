@@ -3,6 +3,8 @@ package edu.co.sena.senafy.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -22,5 +24,8 @@ public class RoleEntity {
 
     @Column(name = "description")
     private String description;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "role", fetch = FetchType.LAZY)
+    private List<UserEntity> users;
 
 }

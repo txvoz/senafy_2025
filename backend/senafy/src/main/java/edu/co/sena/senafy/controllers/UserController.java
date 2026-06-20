@@ -8,12 +8,25 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/user")
 public class UserController {
 
     @Autowired
     private UserService service;
+
+    @PostMapping("/logup")
+    public ResponseDto<Boolean> logup(
+            @RequestBody @Validated UserCreateRequestDto request
+    ){
+
+        boolean response = this.service.logUp(request);
+
+        return ResponseDto.<Boolean>builder()
+                .data(response)
+                .build();
+    }
 
     @PostMapping
     public ResponseDto<Boolean> create(

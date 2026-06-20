@@ -1,6 +1,27 @@
 var validMethods = ["GET", "POST", "PUT", "DELETE"];
 var ROOT_URL = "http://localhost:8181/";
 
+function callZone(template, element) {
+    $.ajax({
+        url: template,
+        type: "GET",
+        contentType: "text/html; charset=utf-8",
+        success: function (return_) {
+            $("#" + element).html(return_);
+        },
+        error: function (xhr, status, error) {
+            console.log("Error load template response xhr:: " + JSON.stringify(xhr));
+            console.log("Error load template response status:: " + JSON.stringify(status));
+            console.log("Error load template response error:: " + JSON.stringify(error));
+
+            var internalData = JSON.parse(xhr.responseText);
+            console.log("Error load template response data:: " + internalData);
+
+        }
+    });
+}
+
+
 function callApi(url, method, data, cbSuccess, cbError) {
 
     console.log("callApi :: " + method + " :: " + url);

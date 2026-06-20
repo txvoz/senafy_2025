@@ -11,14 +11,14 @@ import lombok.*;
 @Table(name = "user")
 public class UserEntity {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "role_id")
-    private Integer roleId;
+    @ManyToOne
+    @JoinColumn(name = "role_id", nullable = false, updatable = true)
+    private RoleEntity role;
 
     @Column(name = "id_type")
     private String idType;

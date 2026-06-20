@@ -8,7 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 public class UserCreateRequestDto {
 
-    private Integer roleId;
+    private Long roleId;
     private String idType;
     private String idNumber;
     private String firstName;

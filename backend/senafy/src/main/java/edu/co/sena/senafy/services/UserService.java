@@ -1,18 +1,34 @@
 package edu.co.sena.senafy.services;
 
 import edu.co.sena.senafy.dtos.*;
+import edu.co.sena.senafy.entities.RoleEntity;
 import edu.co.sena.senafy.entities.UserEntity;
 import edu.co.sena.senafy.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Service
 public class UserService {
 
+    private final static Long ID_CUSTOMER_ROLE = 1L;
+
     @Autowired
     private UserRepository repository;
+
+    @Autowired
+    private RoleService roleService;
+
+    public boolean logUp(UserCreateRequestDto dto){
+        dto.setRoleId(ID_CUSTOMER_ROLE);
+        dto.setIsPremium(0);
+        dto.setRegistrationDate(LocalDateTime.now());
+        UserEntity entity = this.dtoToEntity(dto);
+        this.repository.save(entity);
+        return true;
+    }
 
     public boolean create(UserCreateRequestDto dto){
         UserEntity entity = this.dtoToEntity(dto);
@@ -35,9 +51,13 @@ public class UserService {
     }
 
     public boolean update(Long id, UserCreateRequestDto dto) {
+
+        RoleEntity roleEntity = roleService.validateIfExist(dto.getRoleId());
+
+
         UserEntity entity = validateIfExist(id);
         UserEntity newEntity = dtoToEntity(dto);
-        entity.setRoleId(newEntity.getRoleId());
+        entity.setRole(roleEntity);
         entity.setIdType(newEntity.getIdType());
         entity.setIdNumber(newEntity.getIdNumber());
         entity.setFirstName(newEntity.getFirstName());
@@ -66,8 +86,9 @@ public class UserService {
     }
 
     public UserEntity dtoToEntity(UserCreateRequestDto dto){
+        RoleEntity roleEntity = roleService.validateIfExist(dto.getRoleId());
         return UserEntity.builder()
-                .roleId(dto.getRoleId())
+                .role(roleEntity)
                 .idType(dto.getIdType())
                 .idNumber(dto.getIdNumber())
                 .firstName(dto.getFirstName())
@@ -83,7 +104,7 @@ public class UserService {
     public UserResponseDto entityToDto(UserEntity entity){
         return UserResponseDto.builder()
                 .id(entity.getId())
-                .roleId(entity.getRoleId())
+                .roleId(entity.getRole().getId())
                 .idType(entity.getIdType())
                 .idNumber(entity.getIdNumber())
                 .firstName(entity.getFirstName())
